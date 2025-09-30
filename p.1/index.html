@@ -2,40 +2,94 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>sign up/login-page</title>
-    <link rel="stylesheet" href="p1.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign up/Login Page</title>
+  <link rel="stylesheet" href="p1.css">
 </head>
 
 <body>
-        <div class="div1">
-            <div class="div11">
-                <label for="Username">Username:</label>
-                <input type="text" id="Username" placeholder="Username" required>
+  <form id="signupForm">
+    <div class="div1">
+      <div class="div11">
+        <label for="Username">Username:</label>
+        <input type="text" id="Username" placeholder="Username" required>
 
-                <label for="Lastname">Last name:</label>
-                <input type="text" id="Lastname" placeholder="Last name" required>
+        <label for="Lastname">Last name:</label>
+        <input type="text" id="Lastname" placeholder="Last name" required>
+      </div>
 
-            </div>
-            <div class="div12">
-                <label for="Email">Email:</label>
-                <input type="text" id="Email" placeholder="Enter your email" required>
+      <div class="div12">
+        <label for="Email">Email:</label>
+        <input type="text" id="Email" placeholder="Enter your email" required>
+      </div>
 
-            </div>
-            <div class="div13">
-                <label for="password">password:</label>
-                <input type="password" id="passwor" placeholder="password" required="true">
-            </div>
-            <div class="div14">
-                <label for="checkbox"></label>
-                <input type="checkbox" id="check" required="true">Agree to terms & conditions.
-            </div>
-            <div class="div15">
-            <button type="submit" required>Create account</button>
-            </div>
-        </div>
-    </form>
+      <div class="div13">
+        <label for="password">Password:</label>
+        <input type="password" id="password" placeholder="Password" required>
+      </div>
+
+      <div class="div14">
+        <input type="checkbox" id="check" required>
+        <label for="check">Agree to terms & conditions.</label>
+      </div>
+
+      <div class="div15">
+        <button type="submit">Create account</button>
+      </div>
+    </div>
+  </form>
+
+  <script>
+    document.getElementById("signupForm").addEventListener("submit", function (e) {
+      e.preventDefault(); // Stop form from submitting immediately
+
+      let username = document.getElementById("Username").value.trim();
+      let lastname = document.getElementById("Lastname").value.trim();
+      let email = document.getElementById("Email").value.trim();
+      let password = document.getElementById("password").value.trim();
+      let checkbox = document.getElementById("check").checked;
+alert(username);
+      // Username check
+      if (username.length < 3) {
+        alert("Username must be at least 3 characters long.");
+        return;
+      }
+
+      // Last name check
+      if (lastname.length < 2) {
+        alert("Last name must be at least 2 characters long.");
+        return;
+      }
+
+      // Email check
+      let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailPattern.test(email)) {
+        alert("Please enter a valid email address.");
+        return;
+      }
+
+      // Password check
+      let passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+      if (!passwordPattern.test(password)) {
+        alert("Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.");
+        return;
+      }
+      if (password.length < 8) {
+        alert("Password must be at least 6 characters long.");
+        return;
+      }
+
+      // Checkbox check
+      if (!checkbox) {
+        alert("You must agree to the terms & conditions.");
+        return;
+      }
+
+      // If everything is fine
+      alert("Form submitted successfully!");
+      this.submit(); // Now submit the form
+    });
+  </script>
 </body>
-
 </html>
